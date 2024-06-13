@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', App\Livewire\Pos::class);
+Route::get('/', App\Livewire\SelfOrder::class)->name('self-order');
+Route::get('self-order', App\Livewire\SelfOrder::class)->name('self-order');
 
-Route::get('pos', App\Livewire\Pos::class)->name('pos');
 Route::get('product', App\Livewire\ProductList::class)->name('product');
 Route::get('product/create', App\Livewire\ProductCreate::class);
 Route::get('product/edit/{id}', App\Livewire\ProductEdit::class)->name('posts.edit');

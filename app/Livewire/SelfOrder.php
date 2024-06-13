@@ -7,7 +7,7 @@ use App\Models\Product;
 use App\Models\Order;
 use App\Models\OrderProduct;
 
-class Pos extends Component
+class SelfOrder extends Component
 {
     public $search = '';
     public $product;
@@ -22,7 +22,7 @@ class Pos extends Component
                 ->latest()
                 ->first();
         $this->total_price = $this->order->total_price ?? 0;
-        return view('livewire.pos', [
+        return view('livewire.self-order', [
             'products' => Product::search($this->search)->paginate(12),
             'order' => $this->order
         ]);
