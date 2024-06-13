@@ -26,7 +26,7 @@ class SelfOrder extends Component
             'products' => Product::search($this->search)->paginate(12),
             'order' => $this->order
         ]);
-    }
+    }   
 
     public function createOrder()
     {
