@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\Product;
 use App\Models\Order;
 use App\Models\OrderProduct;
+use Illuminate\Support\Facades\Http;
 
 class SelfOrder extends Component
 {
@@ -17,13 +18,14 @@ class SelfOrder extends Component
 
     public function render()
     {
-        $this->order = Order::where('done_at', null)
-                ->with('orderProducts')
-                ->latest()
-                ->first();
-        $this->total_price = $this->order->total_price ?? 0;
+        $orderResponse = Http::get(route('api.orders.latest'));
+        $productResponse = Http::get(route('api.products'), ['search' => $this->search]);
+
+        $this->order = $orderResponse->json();
+        $this->total_price = $this->order['total_price'] ?? 0;
+
         return view('livewire.self-order', [
-            'products' => Product::search($this->search)->paginate(12),
+            'products' => $productResponse->json(),
             'order' => $this->order
         ]);
     }   

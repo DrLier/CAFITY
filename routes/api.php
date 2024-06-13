@@ -20,3 +20,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/order/{orderCode}', [OrderController::class, 'getOrderDetails']);
+Route::get('/orders/latest', [OrderController::class, 'getLatestOrder']);
+Route::get('/products', [ProductController::class, 'getProducts']);

@@ -20,3 +20,6 @@ Route::get('product', App\Livewire\ProductList::class)->name('product');
 Route::get('product/create', App\Livewire\ProductCreate::class);
 Route::get('product/edit/{id}', App\Livewire\ProductEdit::class)->name('posts.edit');
 Route::get('order', App\Livewire\OrderList::class)->name('order');
+
+Route::get('api/orders/latest', [OrderController::class, 'getLatestOrder'])->name('api.orders.latest');
+Route::get('api/products', [ProductController::class, 'getProducts'])->name('api.products');
