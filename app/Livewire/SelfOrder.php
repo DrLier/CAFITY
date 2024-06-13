@@ -89,9 +89,19 @@ class SelfOrder extends Component
 
     public function done()
     {
+        if (!$this->order || $this->order->orderProducts->isEmpty()) {
+            session()->flash('error', 'Keranjang masih kosong. Silakan masukkan menu pesanan terlebih dahulu.');
+            return;
+        }
+
         $this->validate([
-            'paid_amount' => 'required'
+            'paid_amount' => 'required|numeric|min:0'
         ]);
+
+        if ($this->paid_amount < $this->total_price) {
+            session()->flash('error', 'Uang yang dibayarkan kurang. Silakan masukkan jumlah yang benar.');
+            return;
+        }
 
         $this->order->update([
             'paid_amount' => $this->paid_amount,
@@ -99,7 +109,7 @@ class SelfOrder extends Component
         ]);
 
         session()->flash('message', 'Order/Transaksi selesai');
-        return redirect()->route('order');
+        return redirect()->route('self-order');
     }
 
     function generateUniqueCode($length = 6) {
@@ -112,5 +122,4 @@ class SelfOrder extends Component
 
         return $uniq;
     }
-
 }

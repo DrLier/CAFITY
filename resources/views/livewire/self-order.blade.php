@@ -59,6 +59,12 @@
                     </div>
                 @endif
 
+                @if (session()->has('error'))
+                    <div class="alert alert-danger text-center">
+                        {{ session('error') }}
+                    </div>
+                @endif
+
                 @if ($order)
                     @foreach ($order->orderProducts as $item)
                         <div class="card mt-2">
@@ -112,7 +118,12 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form class="row g-3" wire:submit="done" enctype="multipart/form-data">
+                <form class="row g-3" wire:submit.prevent="done" enctype="multipart/form-data">
+                    @if (session()->has('error'))
+                        <div class="alert alert-danger text-center">
+                            {{ session('error') }}
+                        </div>
+                    @endif
                     <div class="col-md-12">
                         <label for="paid_amount" class="form-label">Uang yang dibayarkan</label>
                         <input type="number" class="form-control" id="paid_amount" name="paid_amount" wire:model="paid_amount">
