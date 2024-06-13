@@ -14,7 +14,7 @@
 1. Clone the repository:
 
     ```bash
-    https://github.com/DrLier/Cafity-
+    https://github.com/DrLier/Cafity
     ```
 
 2. Navigate to the project directory:
